@@ -26,16 +26,10 @@ food_size = 30
 foods = {
     "eple": {
         "score": 10,
-        "comment": "Rødt, syrlig og godt"
+        "comment": "Rødt, syrlig og godt",
     },
-    "dravle": {
-        "score": 5,
-        "comment": "Ikke veldig godt, men la gå!"
-    },
-    "gammelost": {
-        "score": -10,
-        "comment": "Uæh! Det smakte pyton!"
-    }
+    "dravle": {"score": 5, "comment": "Ikke veldig godt, men la gå!"},
+    "gammelost": {"score": -10, "comment": "Uæh! Det smakte pyton!"},
 }
 
 current_food = random.choice(list(foods.keys()))
@@ -46,7 +40,7 @@ score = 0
 font = pygame.font.Font(None, 36)
 
 
-#MatPrat
+# MatPrat
 food_comment = ""
 comment_time = 0
 comment_duration = 2000
@@ -54,7 +48,6 @@ comment_duration = 2000
 running = True
 
 while running:
-
     # Events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -84,19 +77,9 @@ while running:
         running = False
 
     # Kollisjonsbokser
-    paal_rect = pygame.Rect(
-        paal_x,
-        paal_y,
-        paal_width,
-        paal_height
-    )
+    paal_rect = pygame.Rect(paal_x, paal_y, paal_width, paal_height)
 
-    food_rect = pygame.Rect(
-        food_x,
-        food_y,
-        food_size,
-        food_size
-    )
+    food_rect = pygame.Rect(food_x, food_y, food_size, food_size)
 
     # Har Pål matvet?
     if paal_rect.colliderect(food_rect):
@@ -117,46 +100,24 @@ while running:
     screen.fill((35, 40, 35))
 
     # Tegn Pål
-    pygame.draw.rect(
-        screen,
-        (80, 180, 80),
-        (paal_x, paal_y, paal_width, paal_height)
-    )
+    pygame.draw.rect(screen, (80, 180, 80), (paal_x, paal_y, paal_width, paal_height))
 
     # Tegn mat
-    pygame.draw.rect(
-        screen,
-        (200, 70, 70),
-        (food_x, food_y, food_size, food_size)
-    )
+    pygame.draw.rect(screen, (200, 70, 70), (food_x, food_y, food_size, food_size))
 
     # Tekst over maten
-    food_text = font.render(
-        current_food,
-        True,
-        (255, 255, 255)
-    )
+    food_text = font.render(current_food, True, (255, 255, 255))
 
-    screen.blit(
-        food_text,
-        (food_x, food_y - 30)
-    )
+    screen.blit(food_text, (food_x, food_y - 30))
 
     # Score
-    score_text = font.render(
-        f"Score: {score}",
-        True,
-        (255, 255, 255)
-    )
+    score_text = font.render(f"Score: {score}", True, (255, 255, 255))
 
-    screen.blit(
-        score_text,
-        (20, 20)
-    )
+    screen.blit(score_text, (20, 20))
 
     if pygame.time.get_ticks() - comment_time < comment_duration:
-        comment_text = font.render(food_comment, True,(255,255,255))
-        screen.blit(comment_text,(20,60))
+        comment_text = font.render(food_comment, True, (255, 255, 255))
+        screen.blit(comment_text, (20, 60))
 
     pygame.display.flip()
 
